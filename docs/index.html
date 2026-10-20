@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BotCorp – The Company Run by Bots</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#14162b;--mut:#62667f;--a:#6c4cff;--b:#00c2ff;--ok:#12b76a;--bd:#e3e5f0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0d1a;--card:#141830;--tx:#eef0ff;--mut:#9aa0c3;--bd:#262b4d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0b0d1a;--card:#141830;--tx:#eef0ff;--mut:#9aa0c3;--bd:#262b4d;color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;justify-content:space-between;align-items:center;padding:14px 5vw;background:color-mix(in srgb,var(--bg) 80%,transparent);backdrop-filter:blur(12px)}
+nav b{font-size:1.2rem;background:linear-gradient(90deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
+nav a{color:var(--mut);text-decoration:none;margin-left:18px;font-size:.9rem}
+.hero{position:relative;text-align:center;padding:12vh 6vw 10vh;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.45;animation:float 9s ease-in-out infinite}
+.b1{width:340px;height:340px;background:var(--a);top:-80px;left:-60px}
+.b2{width:300px;height:300px;background:var(--b);bottom:-60px;right:-40px;animation-delay:-4s}
+@keyframes float{50%{transform:translate(40px,30px) scale(1.15)}}
+.hero h1{position:relative;font-size:clamp(2.2rem,7vw,4.8rem);margin:0 0 16px;line-height:1.05}
+.hero h1 span{background:linear-gradient(90deg,var(--a),var(--b),var(--a));background-size:200%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 4s linear infinite}
+@keyframes sh{to{background-position:200%}}
+.hero p{position:relative;max-width:620px;margin:0 auto 26px;color:var(--mut);font-size:1.1rem}
+.btn{position:relative;display:inline-block;padding:14px 28px;border-radius:99px;background:linear-gradient(90deg,var(--a),var(--b));color:#fff;text-decoration:none;font-weight:600;border:0;cursor:pointer;font-size:1rem;animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(108,76,255,.5)}100%{box-shadow:0 0 0 22px rgba(108,76,255,0)}}
+.stats{display:flex;justify-content:center;gap:34px;flex-wrap:wrap;margin-top:40px;position:relative}
+.stats div{font-size:2rem;font-weight:800}.stats small{display:block;font-size:.8rem;color:var(--mut);font-weight:400}
+section{padding:70px 5vw;max-width:1180px;margin:auto}
+h2{font-size:clamp(1.6rem,4vw,2.4rem);margin:0 0 8px;text-align:center}
+.sub{text-align:center;color:var(--mut);margin:0 0 40px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:22px;text-align:center;transition:.3s;opacity:0;transform:translateY(30px)}
+.card.in{opacity:1;transform:none}
+.card:hover{transform:translateY(-8px) rotate(-.6deg);box-shadow:0 18px 40px rgba(108,76,255,.2)}
+.av{width:74px;height:74px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;font-size:2.1rem;background:linear-gradient(135deg,var(--a),var(--b));animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.card h3{margin:4px 0}.role{color:var(--a);font-size:.85rem;font-weight:600}
+.card p{color:var(--mut);font-size:.88rem;margin:10px 0}
+.st{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;color:var(--mut)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--ok);animation:bl 1.4s infinite}
+.off .dot{background:#999;animation:none}
+@keyframes bl{50%{opacity:.3}}
+.ceo{max-width:340px;margin:0 auto 18px}
+.tog{margin-top:10px;padding:7px 16px;border-radius:99px;border:1px solid var(--bd);background:transparent;color:var(--tx);cursor:pointer}
+.panel{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.panel{grid-template-columns:1fr}nav a{display:none}}
+.box{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:20px}
+.feed{height:300px;overflow:auto;font-family:ui-monospace,Menlo,monospace;font-size:.82rem}
+.feed div{padding:6px 0;border-bottom:1px dashed var(--bd);animation:sl .4s}
+@keyframes sl{from{opacity:0;transform:translateX(-14px)}}
+pre{background:#0b0d1a;color:#9be7ff;padding:16px;border-radius:14px;overflow-x:auto;font-size:.82rem}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:20px}
+.steps div{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px}
+.steps b{color:var(--a)}
+footer{text-align:center;padding:40px;color:var(--mut)}
+#bg{position:fixed;inset:0;z-index:-1;width:100%;height:100%}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;z-index:20;background:linear-gradient(90deg,var(--a),var(--b),#ff4ecd)}
+#glow{position:fixed;width:360px;height:360px;margin:-180px 0 0 -180px;border-radius:50%;pointer-events:none;z-index:-1;background:radial-gradient(circle,rgba(108,76,255,.28),transparent 65%);transition:transform .08s}
+body{background:linear-gradient(120deg,var(--bg),color-mix(in srgb,var(--a) 10%,var(--bg)),color-mix(in srgb,var(--b) 10%,var(--bg)),var(--bg));background-size:300% 300%;animation:bgm 16s ease infinite}
+@keyframes bgm{50%{background-position:100% 50%}}
+.orbit{position:absolute;left:50%;top:50%;width:0;height:0;pointer-events:none}
+.orbit i{position:absolute;font-style:normal;font-size:1.8rem;animation:orb 14s linear infinite;animation-delay:var(--d)}
+@keyframes orb{from{transform:rotate(0) translateX(min(38vw,420px)) rotate(0)}to{transform:rotate(360deg) translateX(min(38vw,420px)) rotate(-360deg)}}
+.tw{position:relative;height:1.8em;font-size:1.3rem;font-weight:600;margin-bottom:18px;color:var(--a)}
+.tw:after{content:'|';animation:bl .8s infinite}
+.mq{overflow:hidden;white-space:nowrap;padding:16px 0;border-block:1px solid var(--bd);background:var(--card)}
+.mq div{display:inline-block;animation:mq 25s linear infinite;font-weight:700;color:var(--mut)}
+.mq span{margin:0 28px}
+@keyframes mq{to{transform:translateX(-50%)}}
+.rv{opacity:0;transform:translateY(40px) scale(.96);filter:blur(6px);transition:all .8s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none;filter:none}
+.card{transition:transform .15s,box-shadow .3s,opacity .7s;transform-style:preserve-3d}
+.card.in:hover{box-shadow:0 18px 50px rgba(0,194,255,.35)}
+.av{box-shadow:0 0 0 0 rgba(108,76,255,.5);animation:bob 3s ease-in-out infinite,ring 2.5s infinite}
+@keyframes ring{100%{box-shadow:0 0 0 20px rgba(108,76,255,0)}}
+.card:nth-child(even) .av{animation-delay:-1s}
+.btn,.tog{position:relative;overflow:hidden}
+.rp{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);transform:scale(0);animation:rp .6s linear;pointer-events:none}
+@keyframes rp{to{transform:scale(4);opacity:0}}
+.cf{position:fixed;width:9px;height:14px;z-index:30;pointer-events:none;animation:cf 1.4s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--x),var(--y)) rotate(720deg);opacity:0}}
+.hero h1{animation:hin 1.2s cubic-bezier(.2,.8,.2,1)}
+@keyframes hin{from{opacity:0;transform:translateY(50px) scale(.9);letter-spacing:.2em}}
+nav b{display:inline-block;animation:bob 3s ease-in-out infinite}
+.stats div{animation:hin 1.4s both}
+:root:root:root{--bg:#04050f;--card:rgba(14,18,44,.7);--tx:#eef0ff;--mut:#a9aed6;--bd:rgba(130,140,255,.25);color-scheme:dark}
+body{background:radial-gradient(ellipse at 15% 10%,rgba(88,50,200,.45),transparent 55%),radial-gradient(ellipse at 85% 75%,rgba(0,120,255,.3),transparent 55%),radial-gradient(ellipse at 50% 110%,rgba(255,60,190,.18),transparent 50%),#02030a;animation:none}
+.card,.box,.steps div,.mq{backdrop-filter:blur(10px)}
+nav{background:rgba(4,5,15,.55)}
+.pl{position:fixed;z-index:-1;border-radius:50%;pointer-events:none}
+.p1{width:150px;height:150px;right:6vw;top:18vh;background:radial-gradient(circle at 30% 30%,#ffb36b,#c4482b 55%,#3a0f10);box-shadow:0 0 60px rgba(255,120,60,.45);animation:float 12s ease-in-out infinite}
+.p2{width:90px;height:90px;left:4vw;bottom:14vh;background:radial-gradient(circle at 30% 30%,#9be7ff,#2a6bff 55%,#06124a);box-shadow:0 0 50px rgba(60,140,255,.5);animation:float 10s ease-in-out infinite reverse}
+.p2:after{content:'';position:absolute;left:-40%;top:42%;width:180%;height:16%;border:3px solid rgba(190,220,255,.6);border-radius:50%;transform:rotate(-18deg)}
+.p3{width:46px;height:46px;left:42vw;top:8vh;background:radial-gradient(circle at 30% 30%,#e6e6ff,#7b7fb5 60%,#242850);animation:float 8s ease-in-out infinite}
+.fl{position:fixed;z-index:-1;font-size:2.4rem;pointer-events:none}
+.astro{right:10vw;bottom:10vh;animation:float 7s ease-in-out infinite,spin 40s linear infinite}
+@keyframes spin{to{rotate:360deg}}
+.rocket{left:-10vw;top:70vh;animation:fly 18s linear infinite}
+@keyframes fly{to{transform:translate(120vw,-60vh) rotate(0)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important;transition:none!important}}
+.card.in{transition-delay:0ms}.card p{line-height:1.5}.card .result{font-size:.8rem;border-top:1px solid var(--bd);padding-top:12px}.card a{color:var(--b);overflow-wrap:anywhere}.card button:disabled{opacity:.55;cursor:wait}.card .tog{margin:8px 4px 0}.card small{color:var(--mut)}#error{color:#ffb4ad;text-align:center}.feed .failed{color:#ffb4ad}.ctl-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--bd)}@media(max-width:500px){.stats{gap:20px}.hero{padding-top:8vh}.orbit{display:none}}
+</style>
+</head>
+<body><div style="position:relative;z-index:20;background:#35236a;color:white;padding:15px;text-align:center;font:16px system-ui">Public showcase · Sample content only · AI workers and website controls run in the local Node.js application. <a style="color:#9ee5ff" href="https://github.com/gampaadvaith2006/botcorp-public">View project source</a></div>
+<canvas id="bg"></canvas><div class="pl p1"></div><div class="pl p2"></div><div class="pl p3"></div><div class="fl astro">🧑‍🚀</div><div class="fl rocket">🚀</div><div id="bar"></div><div id="glow"></div>
+<nav><b>🤖 BotCorp</b><div><a href="#team">Team</a><a href="#control">Control</a><a href="#connect">Connect</a></div></nav>
+
+<header class="hero">
+<div class="blob b1"></div><div class="blob b2"></div>
+<div class="orbit"><i style="--d:0s">🧠</i><i style="--d:-2.3s">💻</i><i style="--d:-4.6s">📣</i><i style="--d:-7s">🎧</i><i style="--d:-9.3s">📈</i><i style="--d:-11.6s">🛡️</i></div>
+<h1>Your company. Your <span>bots.</span><br>One control centre.</h1>
+<p>Your full BotCorp team for ExampleSite. Run website checks, prepare marketing and content, and see the results from every task.</p>
+<div class="tw"><span id="tw"></span></div>
+<a class="btn" href="#control">Launch the team</a>
+<div class="stats"><div>384<small>Team workers</small></div><div id="n1">0<small>Bots enabled</small></div><div id="n2">0<small>Completed runs in history</small></div><div id="n3">—<small>Backend connection</small></div></div>
+</header>
+
+<div class="mq"><div id="mqi"></div></div>
+
+<section id="team">
+<h2>Meet the Bot Team</h2><p class="sub">12 department heads · 384 workers · 3 managers, 4 team leaders, 10 quality analysts and 15 members per department.</p>
+<p id="error" role="alert"></p><div id="all-team-controls" style="text-align:center;margin-bottom:28px"><button class="tog" id="start-all-teams">View team structure</button> <button class="tog" id="stop-all-teams">Local backend required</button><p id="all-team-status" role="status">Workers are local AI role sessions, queued on one model. Open any Team monitor to follow every stage.</p></div><div style="text-align:center;margin:24px 0"><button class="btn" id="run-all-bots">Preview 384-worker structure</button><p id="run-all-message" role="status">Start all 384 workers across the 12 bot teams. Follow their proposals, debates and quality reviews in each Team monitor.</p></div><div id="ceo" class="ceo"></div>
+<div class="grid" id="team-grid"></div>
+</section>
+
+<section id="control">
+<h2>Control Panel</h2><p class="sub">Real task history from your local backend.</p>
+<div class="panel">
+<div class="box"><b>Live activity</b><div class="feed" id="feed"></div></div>
+<div class="box"><b>Website controls</b><br><br>
+<div id="ctl"></div></div>
+</div>
+</section>
+
+<section id="connect">
+<h2>Connect Your Website</h2><p class="sub">Run the source locally to connect your own website and local AI model.</p>
+<div class="steps"><div><b>1. Choose a bot.</b><p>Turn it on to run its task now, then every six hours while this program is open.</p></div><div><b>2. Review real results.</b><p>Download generated files and inspect the live activity below.</p></div><div><b>3. Publish approved changes.</b><p>Production publishing is not connected yet. Files remain local until deployed.</p></div></div><p class="sub">No paid APIs or ads. External posting, inboxes, billing and production editing are not connected.</p></section>
+<footer>© 2026 BotCorp · Built with bots 🤖</footer>
+
+<script src="demo.js" defer></script></body></html>
