@@ -1,0 +1,3 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');const {configuration,publish}=require('./social-publish.cjs');
+test('social channels require official credentials',()=>{const c=configuration({});assert.equal(c.youtube.length,3);assert.equal(c.instagram.length,4);});
+test('publishing cannot silently run without explicit enablement',async()=>{await assert.rejects(publish('.', 'youtube',{}),/not enabled/);await assert.rejects(publish('.','youtube',{BOTCORP_AUTO_PUBLISH:'true'}),/not connected/);await assert.rejects(publish('.','instagram',{BOTCORP_AUTO_PUBLISH:'true'}),/not connected/);});
